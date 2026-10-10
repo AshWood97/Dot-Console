@@ -1,0 +1,809 @@
+{
+  "files": [
+    {
+      "path": "INSTALL.md",
+      "sha256": "9654d55c2018ce3bf85fab316e536caa1c4d7bade29ca46c8df756bbf382d1a4",
+      "mode": "0644"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "sha256": "86f75e9b701a28e318b96e9ce110d8bcb5e7b177572e64c42babd82c34c40083",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.dev.vars.example",
+      "sha256": "c043a493443a69d65d92096898d995bc2bd1e6e50c1007bf0fc0f5bf9ffb3179",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.env.example",
+      "sha256": "89157cdeb6aef767923b696dce7389af2ebacc0f34b8184e07e200e836cafeab",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.github/workflows/ci.yml",
+      "sha256": "7670a5d484f086fec092016c4ff90d6e8036532561f46a9354b92b068decfc88",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.github/workflows/docs.yml",
+      "sha256": "8234aa03b78e004b86dba6bcab7b0a32f0db29dcc76e44580e4d1600f6750f04",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.github/workflows/package.yml",
+      "sha256": "63d7a6fb19d84bfcc92c4d50f2dd212c080f16956c0cd6fe265b760397a5e785",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/.gitignore",
+      "sha256": "b7de2550042b4b0012b1dc46e8ea9073cb3373aade3724fbdcaaf4d8b501f65a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/LICENSE",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/README.md",
+      "sha256": "ff408dbf53932e2773f548a0369a1a9e37143c99f6e06fe160d3b03d2153479c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/SECURITY.md",
+      "sha256": "5a0eb434b2bf910c85cdf0f959915f7c8c37ce67b62756fd69fa1809be4c6fde",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/SOURCE_MANIFEST.json",
+      "sha256": "bcf08b129563022352bbac55852b1c936dbe14f4215b755a26f453823754e3bd",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/THIRD_PARTY_NOTICES.md",
+      "sha256": "5f464435af3387e8bc198a3be5f0cab94c0a51fab1465c0964b4d41fe9f78992",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/README.md",
+      "sha256": "f52d3472456945573049130b677b0f25af8ac28be017602704085ea3e78b09aa",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/create-dot-panel-widget/SKILL.md",
+      "sha256": "635e67e85d7f16cd5314326d40d25baccd058bd14f573990e761ea01a98cd90e",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/edit-dot-panel-widget/SKILL.md",
+      "sha256": "0638c310ad86e068bef789e0b422e7f4bb7f25a5521ec2bdf33cfcc8fdf50563",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/maintain-dot-panel/SKILL.md",
+      "sha256": "7c6e019ec48fb07d3abb5e1c72b6499169bccda6dbc36e2bd7ed34e7eef08e1a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/manage-dot-panel-usage/SKILL.md",
+      "sha256": "bf0f3c8ef26051df961d68b25285a3652ed4e69de02773fc8a067956b361e99a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/setup-dot-panel/SKILL.md",
+      "sha256": "19fa63607ad5bfa0f3e2a4da2afb27e1cacbca8b7589b0b097b010be1979da26",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/template/manifest.ts",
+      "sha256": "b674e0f4c3c28d182c10d6fe30d2351e60dbf67dfaf917c71519d1aef9e5fad9",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/template/snapshot-model.test.ts",
+      "sha256": "b20356a31895a5e32eb8ba7f1b628ba0a84558a55768f9f0396b19ae68762fce",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/template/snapshot-model.ts",
+      "sha256": "9009a9a5d39ef1802890487dab943ee4d2ccbaa036ece37d7707397a15c14e49",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/agent-skills/template/snapshot-widget.tsx",
+      "sha256": "d3538d83f2e5db274168a280593d49f03293bbf9114cfd66d4ea00f06e677028",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/cloudflare-env.d.ts",
+      "sha256": "cc58fd8b90d02a7253ce945dff70e37e8e225a530e32b4ba6b85907fa8d01287",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/db/schema.ts",
+      "sha256": "52323e0339920a8bccbb3be54363a604869f936c33a28e6e7dbce8e17694aa1f",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/agent-setup-protocol.md",
+      "sha256": "7f15dbe12c91ced35e700950a3a545cc764f97d58c90fcbee0ce3cdcaf3859b6",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/assets/header.svg",
+      "sha256": "c428be34a6481a476368681058ff11e8059c4a26704a1321feccfb1a2dff0375",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/framework-installation.md",
+      "sha256": "cfa20f657f98b2e85233e4ef27b384cf7a61b89dbb388053a320af7314f6060d",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/operations.md",
+      "sha256": "27143b40a9027cbeb19d08ef7bb2ca57f5069a58d185677fcad94f918ebc31f0",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/package-candidate.md",
+      "sha256": "e6599e6ff0b99180b72a53b37fc55f6659842196ed10c7c509f126d63a02d0ba",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/plugin-branding.md",
+      "sha256": "775a1c53d054dbb2db93bce9a8c7123906dc8e4f63e04867f06b8f0bcf72aa30",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/privacy.md",
+      "sha256": "4beca37ee4552cf7bafde2e75b2eb00fbde90d61771206c389bbb34ceb1cccce",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/usage-tracker.md",
+      "sha256": "32546b590a396f4c712fed780743be7f58a5ff9d6bf2d2363f9c4acbb0ec1985",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/docs/v1-readiness.md",
+      "sha256": "ecf684e1df6d3be29d1c450edadcfa225e6f4088a359fe60b0924ba99fd946a5",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle.config.ts",
+      "sha256": "8f0b0441ef2d967c839418715a2cbb051c0338dc156d989895c03ccbc81d4cf6",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0000_aberrant_imperial_guard.sql",
+      "sha256": "e277b02baf36ca3d609b2622d23c52be5c8343d0fd3b861b81cd07bd8c9a4fd8",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0001_parched_wrecker.sql",
+      "sha256": "48c139bf3376b391ecea2deb698485efe4271b3d54820198f3799d01d6ef5ac8",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0002_famous_hannibal_king.sql",
+      "sha256": "c86e69b9576607e8d51fad4b040bcf2e713348fc560b5c4dcab1438f797f99c1",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0003_nifty_stepford_cuckoos.sql",
+      "sha256": "0e45650cd171b9690c3663c097e5335962ac91a110164a8aae873a447fffe826",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0004_organic_marvel_boy.sql",
+      "sha256": "c1c5fd65c153376c89600e61cb87d46f58325ea30cb4b52de60c11f15b06bd1f",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0005_soft_frog_thor.sql",
+      "sha256": "27c44d13245bc218caeaebb475f6e4b6e3b957485d926c44674bbcf646287333",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/0006_romantic_lady_bullseye.sql",
+      "sha256": "e82b0f91d942390dedfd5c3141ae023c88051a08b3810a8b434bfecba3fb2604",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0000_snapshot.json",
+      "sha256": "b6443e71da1b0fee9c7a65616ef5e5f4953edd1d36afd10ff656cf9773008038",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0001_snapshot.json",
+      "sha256": "6a2f85c1e22b645f447cbe93623f040a42bb90f2ee797814a6b4bd2392154252",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0002_snapshot.json",
+      "sha256": "a089e2100a60ed5d908cfae8703b2f3df8de6a2f553d32eb54f022dca3a12724",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0003_snapshot.json",
+      "sha256": "8c13b82c143f4676d05eab09ad19ac474918ab85387621413c94100953725707",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0004_snapshot.json",
+      "sha256": "cd4d281dbf229928977c6730f91113176c74fc35c1f7bda804b905a5c7397091",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0005_snapshot.json",
+      "sha256": "7910da85c389a7d99e7ce303ce066ac29a2254726441302c2714c2f89e9d27d8",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/0006_snapshot.json",
+      "sha256": "da5797d16b8e2d37a6ee8fb4d234a77acb47907df10b06a1f6edc2fb677cb787",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/drizzle/meta/_journal.json",
+      "sha256": "ee298b43b274ecac18aec697ff135b6c0796e1974ea3fab1ab0c31d7dd5d2468",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/index.html",
+      "sha256": "af63d7880d7556495db8e814094fbc860a3d248466d180869f4d48ea335216c3",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/brand.ts",
+      "sha256": "fd51d15423f4895613d61b66573d3c9e2050bbd4af216ebb457781069c72bae6",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/briefing-link.ts",
+      "sha256": "9e0e20d18d8cc4e4afa98e6d44ccddaf041be3eff4735ced136f10ec15b640d4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/calendar-store.ts",
+      "sha256": "87078bf4d81ef28105c59a0959fa2af89cc14ab6d111fc82fe2a97d8c5e8a168",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/calendar.ts",
+      "sha256": "1fca86fce4285742b77a97247fd196e82c840e21fc9f19461c1e18c44c52db10",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/events.ts",
+      "sha256": "b82737f6b8674ae39fe919a60f3fe11284d0cceda86a43014aeddfdbac991d19",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/freshness.ts",
+      "sha256": "66b03f75199225fdf541f4309fd0ad6ede3fcd99f88953da5a3b16e704cefd57",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/http.ts",
+      "sha256": "09d88ba92e3bafc1664e1a80ef898e46a627c4935c8bf9db9de394fbdb31dd39",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/layout-model.ts",
+      "sha256": "cfe47b5f6cf684ae5db05d49931f14c465bf337a68ee30053be44ef41322289b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/layout-store.ts",
+      "sha256": "ae65da7643b6c16865bd4862bf894d912a05a0051e7ae975c59b46f4dbc0c48a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/mcp.ts",
+      "sha256": "0c54ab34befc6dfe8f91f54db2559a9d597f698df58ee0f1ea8c912ee958de51",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/owner-settings.ts",
+      "sha256": "9597ad2c3273267d3ca85384e93da549414df2411c3b182c54567a13ecde0e56",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/panel-config.ts",
+      "sha256": "64dab87b8907e51e2d4668662b69d78c04f108a5354bdc7e765706711eebadea",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/presentation.ts",
+      "sha256": "6ab6ba1ca12d0e3bd95fd225cf618896ddbf765561a09c1834bdd71940e10d83",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/project-identity.d.mts",
+      "sha256": "fc978eaf9b794472fadcdb5dd554fd6b67a252c832e1c13fc78902f002dec0ea",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/project-identity.mjs",
+      "sha256": "67a60db23c3d69ff7a8c2f6fe21f5661552fbfc36d66e2823631e31c49194d42",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/question-queue.ts",
+      "sha256": "5391bcb7bcd64d710ec47614fd4ab0370830d3be8f6b0d454078c19cd0672e57",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/setup-status.ts",
+      "sha256": "9c74e1a1b1ffca1821a1bfd2a3accbe7e5b9a5f112abea3281dbdd28f67b5fab",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/single-flight.ts",
+      "sha256": "457affa5ff6dd3f96a3ca0e52b9c582360677f6d1700ee7f0c24f35269b83dfd",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/status-updates.ts",
+      "sha256": "9a7db298f5b7e4a852a13272b9cfa40c49b543ec218719a991e6d7debd77de3b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/store.ts",
+      "sha256": "7a3815a31faf1b86f04c4ddf5ca5b1e044667055767adfa054161da62c88aa53",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/task-reporting.d.mts",
+      "sha256": "15c58a5da19008e23ec988ad3fa4aa70bf64caae07fe1780e11c7a382b6d68b8",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/task-reporting.mjs",
+      "sha256": "fd1c7bdfdec71e9af2dec992ca79af02d1136daecc0ac261d80233a750487a04",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/lib/usage-store.ts",
+      "sha256": "92150760e92602e3020b040bc7a28439cb24e140ddcefd2576f35d0a6bdef86a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/BRANDING.md",
+      "sha256": "549be2d3555885b2d7102c5ebea5452b5119f8c3ca94f4ecd2bf82c609fc6509",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/DESKTOP-STARTUP.md",
+      "sha256": "9e285af8996ecfafdc0845bc632317488caf90e5a4c81bd0b674e3830caea96a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/PASSIVE-BOARD.md",
+      "sha256": "87609dcc027444704ffa7993cbdf4e0223a08f967f4750e4dbedf9ba5384374b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/README.md",
+      "sha256": "ce49b2c79a2b8e84bf7bb269185003b33570f5946eb207f3fe89c2af49b3d71e",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/REPORTING.md",
+      "sha256": "20dc74f3105327a1272d4a34381c0afcb25a955c428c11921f2aad6f64525324",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/desktop-start.py",
+      "sha256": "5b62335c3a9e9df7ead0c249fead8b0013528eec4805e2968c8623866a73b18f",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/local/emit.mjs",
+      "sha256": "ab3b2009936b8d9bde9b97f9b8f1d5936ddfa7dc5c4d6bbaca7a344cfb2bac91",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/local/events.mjs",
+      "sha256": "cab7fef5cae07fc805526dfdcb04e4b58e3713e06066d89d2196a3e8493905ff",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/install-desktop.sh",
+      "sha256": "fab8b64863eb2d0d2abec0a61c4c0926c48ec73d0c3c3b4b7009f64a64524e09",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/local/report.mjs",
+      "sha256": "619e48c6be5baf41a49ec03a26143db4bcff1822641624bb7f6422448f4ff297",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/local/reporting.mjs",
+      "sha256": "0b0ef66bb37efa14be000ce0e0615c7246fced362758aed7e64848caa34df52c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/server.mjs",
+      "sha256": "6954a6bf7a50aa212b78a2bfd7b5121c6a71e0e7e92420fdb6eca650bf1796a7",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/package-lock.json",
+      "sha256": "8be7d5074bdf204e12f3b0cfba0fe94f7db72bb6665bb37365161b4eb35167cf",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/package.json",
+      "sha256": "90317db958c8e918604bff5da26263865924aa4f391590fff195ee85bed97dfb",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/INSTALL.md",
+      "sha256": "530f5b18e504c3d37ef7a7432fae1cacabd009c694884479768c24305100f7c7",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/LOCAL-INSTALL.md",
+      "sha256": "9654d55c2018ce3bf85fab316e536caa1c4d7bade29ca46c8df756bbf382d1a4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/plugin.json",
+      "sha256": "9de3de3e5a5302b40be7e91f973d8fc6e416232001ad20d35e6a3b65fd38723a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/plugin.schema.json",
+      "sha256": "0a4aad95ce337878ad38802ebf0daa3fde76abe3f65400c86bcbb1ec0b3ab883",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/validation-1.0.0.json",
+      "sha256": "d2dfae7a3d37ba315e05c8eee6e3c679027006ea9135b2e225cb40d076ebf701",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/packaging/validation-rc.1.json",
+      "sha256": "2b59a67a54b66d732207327ec3bbca0aa21eeef26e06a12739115df30ce7e6a0",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/README.md",
+      "sha256": "dd35f9257ac18e6250a1782696f2a80fb8eec392d8586dbd79db6dadc9549a9b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/brand-preview.png",
+      "sha256": "d22ab45671f7ba6d2cc22e37db121592e1311984c0fc88ff948d2d8d800a5e89",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/contrast.json",
+      "sha256": "6027e7ac9d2d0c9d2ae1e78ecdb9aa9943b7979671207b6b2ab3f7fd822f2fbf",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-16.png",
+      "sha256": "febdc7f77914279e91ebfa9be1cef4cc7864b706b8748981ed6f3ee7365dd3b4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-180.png",
+      "sha256": "07b84a1b90d9cb6334020e02a706a0a56caea0120daccd8100be0785bb7a7e8b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-192.png",
+      "sha256": "ef2013c3648a1e16e832af5a62f9296304fc8b22834cc1271fdf3c141c7d2353",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-32.png",
+      "sha256": "5e2ba75d7d8531d1dd01a7a820c5b2881f958d5d7d42788c32c01f7cf67e1d76",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-48.png",
+      "sha256": "8e20b62687aad4bdde3d5a0ece2618147cda374afd7acaed99f7625169be0a6e",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-512.png",
+      "sha256": "3dba76c8e015facc9ef22ac5b76a1ad4a8f084cc60ccbd5b2170bcd3cb173347",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon-preview.png",
+      "sha256": "9ae63aeb14519f3c7c07747a2095c767f1ab25fe9cf9b553ce374d130ead4d16",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon.ico",
+      "sha256": "716c01b6688a206f22cf5df852a16946a207c0049ac1080934507a769abb80a7",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/favicon.svg",
+      "sha256": "8067132069d6b6b3ad79e23812283d76b9906b292dcd2fb8be1ab6275fe59ebd",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/generate.py",
+      "sha256": "ee798c74ad0a3012a45dfb6a0691c3de20802e0847961630dd6dd21d518dc1e9",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/mark-dark.svg",
+      "sha256": "8067132069d6b6b3ad79e23812283d76b9906b292dcd2fb8be1ab6275fe59ebd",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/mark-light.svg",
+      "sha256": "8067132069d6b6b3ad79e23812283d76b9906b292dcd2fb8be1ab6275fe59ebd",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/mark-mono.svg",
+      "sha256": "2f2aeda5d6a50c8115feabb1596dba3c7803726d5674001f562402fdd7a13991",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/preview-dark.png",
+      "sha256": "d2db9543ef3cbe68fd335fbc6bb55067ffd27f9544f3d06bb088e7e84e5b4d5d",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/preview-light.png",
+      "sha256": "fdce74a112a09659bad8689d2bc2eb02eb7add95ff15019ffb2e690aaf3ca205",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/render.py",
+      "sha256": "4ad255d8df3bc72c4ade4788081ca8bee2a0ac59dfe8fda53c35e2e5d6acfc8e",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/tokens.css",
+      "sha256": "ec77a2df4dc9422554c78cf0acb9601fa72e4a58ce6778da395849e26773a9d4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/wordmark-dark.svg",
+      "sha256": "38d37ccb646ac03cca00743f04d55579adbe1885c236190e624e90033ec5ab9c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/wordmark-editable-dark.svg",
+      "sha256": "38d37ccb646ac03cca00743f04d55579adbe1885c236190e624e90033ec5ab9c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/wordmark-editable-light.svg",
+      "sha256": "03ffe4b7d586f719fb1ecd12b1647fd5f6c988899d2c6dbdfb4ee339f6bd7bb1",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/brand/wordmark-light.svg",
+      "sha256": "03ffe4b7d586f719fb1ecd12b1647fd5f6c988899d2c6dbdfb4ee339f6bd7bb1",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/public/manifest.webmanifest",
+      "sha256": "4553510c2c164cd7382a27256c26b2bbc720af656dc783ee7724e29b30e2f2b2",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/scripts/build-sites.mjs",
+      "sha256": "bf1dab1671f2807575d01c08bb9cb5e47585b6a28c2093f6ae2ecddb87944853",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/scripts/check-docs.py",
+      "sha256": "0876b5d9b6454b7cf137386e7490ad2d65321d5513c0746a119549027b9e4b85",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/scripts/package-local.py",
+      "sha256": "8a2268fd183aaed4f63e84c7b010ce4e61336e9a01728680ec089fec6f53e67d",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/scripts/package-plugin.py",
+      "sha256": "8323db05298f3b8e21e901a7df359c86dafe0df3db4bdd1d00990185aed4daec",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/scripts/test-template.mjs",
+      "sha256": "8a72d0c7c4826c8b061858f363c08082d3003a3a56eaed91ca4a55fb27fe6179",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/scripts/test.mjs",
+      "sha256": "8b39339fbb1ac887e4d51e0122db94503f893ebd2d8f1167c4982fc7b87ba395",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/scripts/usage-tracker.py",
+      "sha256": "90bf429f81fc671e03bbf385e0e9cf11696634f40346a19ae4df2d8cb69e7eeb",
+      "mode": "0755"
+    },
+    {
+      "path": "dot-panel-main/src/Panel.tsx",
+      "sha256": "07dc9962bd66e6eb33fb7a0d3e77413410e31b743adf896499f1ebf6b882a64c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/TaskWindow.tsx",
+      "sha256": "deb0af42141c6e712edd154432a739318d99481febe30d529c08f6f4c8c106a2",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/calendar-panel.tsx",
+      "sha256": "78b54d6b5cb6c91d40b5763f251fa3cca3a92c71bd1ecdb2317ed1f46feb747a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/calendar-widgets.tsx",
+      "sha256": "121349f71e4f41b05edd5fd930b59fa63c63d15117d21d15de1f22f24efa0246",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/main.tsx",
+      "sha256": "1b05e69fc1cfd13bdb65b284c37619e65f4c18f74539c724add78e2cdf203d29",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/project-model.ts",
+      "sha256": "5e41ae060afa407c509bdc79ea0eb1fd54b400aced3d6a1ab9203f68f410e704",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/styles.css",
+      "sha256": "20ddd3d892e56b9e10421f52e449e329971b344a410c50fc1cb290bde9a29157",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/task-window.css",
+      "sha256": "3c4600932d29f3a3564c0bd03bcafc4d61dbd9584ad8216690e258db72b66d4d",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/usage-panel.tsx",
+      "sha256": "2f9ca4898888e9ebc6bfe547b1c220ba3dfa10222e13ccfaebfec9e606ce2e2d",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/src/widget-board.tsx",
+      "sha256": "d42c7264d51d797435acf530aecc5859ce0140e312d9c9ab7d211de9259ce202",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/binding.ts",
+      "sha256": "e93bc7f429d36555296adc5e2149fcd0731dd6235909ffffc8edaef589dda54a",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/events.test.mjs",
+      "sha256": "9cc463299ce5e64224bcc16d19c7a5e7a89c84a85be45eea4d21814d404a936b",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/project-model.test.mjs",
+      "sha256": "3be77139baa7212a11aaa26ce53ada67641a27616cdfda504ec92c28321677c4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/reporting.test.mjs",
+      "sha256": "89f3bf02c35e3c96986b2107ef9139c27b15f3be957ca3be83406f0e15e32476",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/server.test.mjs",
+      "sha256": "14f82663a947320c88d08da41a28f3d878c747b0f0b9578009e290f300d4e432",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/ui-hooks.mjs",
+      "sha256": "502a76bedefa9d5e70276551266d7f1e7901210a44a962dad485cec81dc72d1f",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/ui.test.mjs",
+      "sha256": "4afa6ea513da78f39f1d03317d2e6de0ec839c3def45fe0fc20fc7110f52077e",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/recovery.mjs",
+      "sha256": "9c1ec874bfe24e8610d6f5ecebdf827c00ceddcafc7d887ac3a0170e77412eef",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-auth.mjs",
+      "sha256": "bd17130cd89436ec84910c838609a75199fe7b4952499eb5d1ae7c499ef7f631",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-crypto.mjs",
+      "sha256": "0964b757803f51d95a0eac03fb2bd741c2082cff7791cf363d96425c0904e482",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-crypto.ts",
+      "sha256": "e98f528e9e6d8cbf8c5123371a50e5bb9d89218ae67608046f013f0207da3ec4",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-fixture.mjs",
+      "sha256": "380668f4fc2973d16b5abc10d93b81cb8e518cb41322c3d7866be4f7a16b3da6",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-isolation.mjs",
+      "sha256": "726032366d9cb5b2390029617c355bb61303351b4577cb13f7f929ccb4ebf6a8",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/runtime-sites.mjs",
+      "sha256": "766f80fe250537bc4783f16071294a40730e39ad5812ebeec3a03f78a3891c44",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/test_desktop_start.py",
+      "sha256": "50b02510d9210b264fac39919f28cf8a90b68bf323e97e921b959b9435450c13",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/test_package_local.py",
+      "sha256": "03fa9022b1ffdea1efb8d37d19faf224e25ecfd52e35fc5f71bc3ad88b425e84",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/test_usage_tracker.py",
+      "sha256": "9464aa40d30035601a207895e80670fa19b875cde6a014f28da5e1b3edf7fa7c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/verify.ts",
+      "sha256": "384d95ff5656849f3ba4c5878c3b504189f796533f01a5c2495b81b6c0884771",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tsconfig.json",
+      "sha256": "987efe98a6c02916aee449c3572650e118af60ea88f986f2ce34b796d5c18e93",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/vite.config.ts",
+      "sha256": "fc5ebd64dc6451079e0e58538f895d78e0cc5d6b57e52d9b67ecc217410894be",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/worker/auth.ts",
+      "sha256": "30413d8886812191908c8a2a2708cf30841c8daa4e89546aadf1e6a3226f42b9",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/worker/index.ts",
+      "sha256": "d5617bfb75fe76c7353893bfbea5972ad13a39973cf6c3f2368b5909b9f0e78c",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/worker/sites.ts",
+      "sha256": "290598f549b2fe1c47160a893d5d055e5be3ec1c6806bef84e916a89453b5c3f",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/wrangler.jsonc",
+      "sha256": "dfd2a6cec0da554e5d2b3e35a5d6df6084b606ff34c4c0b3b673863c81e11230",
+      "mode": "0644"
+    },
+    {
+      "path": "start.sh",
+      "sha256": "2a33cccc39f5a986e84f9a37a9e392801ec14a056f9d87a936e83627f549ab1f",
+      "mode": "0755"
+    }
+  ]
+}

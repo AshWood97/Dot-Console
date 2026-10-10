@@ -1,0 +1,22 @@
+{
+  "package": "dot-console-local-review",
+  "format_version": 1,
+  "license": "AGPL-3.0-only",
+  "source": "Current local working-tree snapshot, including uncommitted local modifications",
+  "upstream_repository": "https://github.com/graydeon/dot-panel",
+  "upstream_baseline_commit": "55b19217d08f33c01e18b51609d1685212aa1c67",
+  "baseline_scope": "Historical plugin baseline only; not the identity of this local snapshot",
+  "source_manifest_sha256": "bcf08b129563022352bbac55852b1c936dbe14f4215b755a26f453823754e3bd",
+  "dependencies": "Not bundled; install exact package-lock.json with npm ci, then npm run build",
+  "distribution_scope": "Private local review/install; source retains owner-specific project labels",
+  "desktop_scope": "Linux X11; advertised 16:10 mode best effort; verified 1280x800 on the original host",
+  "autostart_scope": "Standard per-user XDG login entry; original managed host consumption unverified",
+  "viewer_reconnect": "No viewer reconnect hook; no universal reconnect/open guarantee",
+  "publication": "No upload, release publication, deployment or plugin installation performed",
+  "exclusions": [
+    "Credentials and non-example .env/.dev.vars files",
+    "Task-event history, runtime state, databases, logs and process/open markers",
+    "Dependency trees, generated dist output, QA HTML and private-data QA generators",
+    "Git metadata, host configuration, backups, screenshots and prior delivery files"
+  ]
+}

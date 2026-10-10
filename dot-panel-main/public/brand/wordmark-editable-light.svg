@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="32" viewBox="0 0 180 32" role="img" aria-label="Dot Console">
+  <title>Dot Console</title>
+  <rect width="32" height="32" rx="9" fill="#173E32"/>
+  <path d="m8 10 6 6-6 6" fill="none" stroke="#F4F7F0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="23" cy="21" r="3" fill="#9AD6B3"/>
+  <text x="44" y="23" fill="#173E32" font-family="system-ui, sans-serif" font-size="22" font-weight="650" letter-spacing="-.5">Dot Console</text>
+</svg>

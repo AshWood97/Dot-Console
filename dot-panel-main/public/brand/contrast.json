@@ -1,0 +1,14 @@
+[
+  {
+    "usage": "Command chevron",
+    "foreground": "#F4F7F0",
+    "background": "#173E32",
+    "ratio": 10.96
+  },
+  {
+    "usage": "Assistant dot",
+    "foreground": "#9AD6B3",
+    "background": "#173E32",
+    "ratio": 7.14
+  }
+]

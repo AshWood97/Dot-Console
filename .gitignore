@@ -1,0 +1,53 @@
+# Dependencies and generated output, at every directory depth
+node_modules/
+dist/
+.wrangler/
+coverage/
+__pycache__/
+*.py[cod]
+*.tsbuildinfo
+
+# Local credentials and environment; only explicit examples are source
+.env*
+!.env.example
+.dev.vars*
+!.dev.vars.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+credentials*.json
+secrets.json
+secrets*.json
+.npmrc
+.aws/
+.ssh/
+
+# Private task history, databases, runtime state and logs
+task-events*.jsonl
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.log
+*.pid
+*.sock
+runtime/
+logs/
+usage-helper-state.json
+last-good.json
+
+# Host-specific caches, temporary QA artifacts and editor metadata
+.DS_Store
+.idea/
+.vscode/
+.tmp/
+tmp/
+qa/
+screenshots/
+backups/
+*.bak
+*.tmp
+*~
