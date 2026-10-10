@@ -254,7 +254,7 @@
     },
     {
       "path": "lib/project-identity.mjs",
-      "sha256": "67a60db23c3d69ff7a8c2f6fe21f5661552fbfc36d66e2823631e31c49194d42"
+      "sha256": "6d7679c7f9925bb35af981d9ef6c0d3dd9ee3a2666fdbad0d02d423d545aa3eb"
     },
     {
       "path": "lib/question-queue.ts",
@@ -502,7 +502,7 @@
     },
     {
       "path": "src/TaskWindow.tsx",
-      "sha256": "deb0af42141c6e712edd154432a739318d99481febe30d529c08f6f4c8c106a2"
+      "sha256": "e817d48857deecd82c42c6d95e14c07e3c5653efa66faa8dd7ba37a297c88c9e"
     },
     {
       "path": "src/calendar-panel.tsx",

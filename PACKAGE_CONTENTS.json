@@ -7,7 +7,7 @@
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "86f75e9b701a28e318b96e9ce110d8bcb5e7b177572e64c42babd82c34c40083",
+      "sha256": "0adaf70bb5cc13270d9e2529d51018a33636f7e7e8e9044f6dd1b708e03f5476",
       "mode": "0644"
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "dot-panel-main/SOURCE_MANIFEST.json",
-      "sha256": "bcf08b129563022352bbac55852b1c936dbe14f4215b755a26f453823754e3bd",
+      "sha256": "787af1369c89a20f1969ef96c4f6f20042975f892dee4c8a15b45a7770329967",
       "mode": "0644"
     },
     {
@@ -327,7 +327,7 @@
     },
     {
       "path": "dot-panel-main/lib/project-identity.mjs",
-      "sha256": "67a60db23c3d69ff7a8c2f6fe21f5661552fbfc36d66e2823631e31c49194d42",
+      "sha256": "6d7679c7f9925bb35af981d9ef6c0d3dd9ee3a2666fdbad0d02d423d545aa3eb",
       "mode": "0644"
     },
     {
@@ -637,7 +637,7 @@
     },
     {
       "path": "dot-panel-main/src/TaskWindow.tsx",
-      "sha256": "deb0af42141c6e712edd154432a739318d99481febe30d529c08f6f4c8c106a2",
+      "sha256": "e817d48857deecd82c42c6d95e14c07e3c5653efa66faa8dd7ba37a297c88c9e",
       "mode": "0644"
     },
     {

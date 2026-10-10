@@ -77,12 +77,14 @@ source context, not an active Gitea deployment or a claim that hosted CI ran.
 
 ## Source boundary
 
-The application and portable launcher are unchanged from the verified
+The application behavior and portable launcher are preserved from the verified
 local-review ZIP, SHA-256
 `3f777480833c4175765f2a279725af8806adb35a2989e7ac4629831beea463e0`.
+Gitea normalized one trailing space and one final blank line during source import.
 The packaging-test synthetic fixture was updated to include the required reporting
 and project-identity files; no application behavior changed during this import.
-The source/package manifests were regenerated after this fixture-only correction.
+The source/package manifests were regenerated after the fixture correction and
+whitespace normalization, so they match the repository source.
 Their publication field describes the source-package build step, not this private
 repository import. Repository-level README, ignore rules and license copy are
 additional packaging files. Owner-specific project labels remain in source.
