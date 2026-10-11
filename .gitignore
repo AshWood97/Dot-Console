@@ -1,53 +1,33 @@
-# Dependencies and generated output, at every directory depth
+# Dependencies and temporary developer output
 node_modules/
-dist/
-.wrangler/
 coverage/
-__pycache__/
-*.py[cod]
-*.tsbuildinfo
-
-# Local credentials and environment; only explicit examples are source
-.env*
-!.env.example
-.dev.vars*
-!.dev.vars.example
-*.pem
-*.key
-*.p12
-*.pfx
-credentials.json
-credentials*.json
-secrets.json
-secrets*.json
-.npmrc
-.aws/
-.ssh/
-
-# Private task history, databases, runtime state and logs
-task-events*.jsonl
-*.db
-*.db-*
-*.sqlite
-*.sqlite-*
-*.sqlite3
+.coverage/
 *.log
-*.pid
-*.sock
-runtime/
-logs/
-usage-helper-state.json
-last-good.json
-
-# Host-specific caches, temporary QA artifacts and editor metadata
-.DS_Store
-.idea/
-.vscode/
-.tmp/
-tmp/
-qa/
-screenshots/
-backups/
-*.bak
+npm-debug.log*
 *.tmp
-*~
+*.swp
+.DS_Store
+
+# Environment files may contain secrets
+.env
+.env.*
+!.env.example
+
+# Local state and portable exports must remain outside source control
+data/
+.data/
+.local/
+state.json
+state.bak
+state.json.*
+state.bak.*
+server.lock/
+backups/
+exports/
+*backup*.json
+*BACKUP*.json
+
+# Generated distribution artifacts; inspect an explicit file allowlist
+*.tgz
+*.zip
+dist/

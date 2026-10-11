@@ -1,0 +1,28 @@
+import http from 'node:http';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { promises as fs } from 'node:fs';
+import { Store,InputError,MAX_BYTES,sortedState,object } from './lib/store.mjs';
+import { resourceSampler } from './lib/resources.mjs';
+const ROOT=path.dirname(fileURLToPath(import.meta.url));
+export async function createApp({dataDir=process.env.DATA_DIR||path.join(os.homedir(),'.local/share/dot-console-independent'),port=Number(process.env.PORT||8795)}={}){
+ if(!Number.isInteger(port)||port<0||port>65535)throw new Error('PORT must be an integer from 0 to 65535');
+ dataDir=path.resolve(dataDir);if(dataDir===ROOT||dataDir.startsWith(ROOT+path.sep))throw new Error('DATA_DIR must be outside the source tree');
+ await fs.mkdir(dataDir,{recursive:true,mode:0o700});dataDir=await fs.realpath(dataDir);const sourceDir=await fs.realpath(ROOT);if(dataDir===sourceDir||dataDir.startsWith(sourceDir+path.sep))throw new Error('DATA_DIR must be outside the source tree');const lock=path.join(dataDir,'server.lock');try{await fs.mkdir(lock,{mode:0o700});}catch(e){if(e.code==='EEXIST')throw new Error('DATA_DIR is locked. Stop the other server; after a crash, verify it is stopped before removing server.lock.');throw e;}let store;try{store=await new Store(dataDir).open();}catch(e){await fs.rmdir(lock);throw e;}const sample=resourceSampler(dataDir);let resources=await sample();const timer=setInterval(async()=>{try{resources=await sample();}catch(e){resources={...resources,errors:[`Resource refresh failed: ${e.message}`]};}},3000);timer.unref();
+ const server=http.createServer(async(req,res)=>{res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'");res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('Cache-Control','no-store');const json=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify(data));};try{
+ const bound=server.address().port;const hosts=[`127.0.0.1:${bound}`,`localhost:${bound}`];if(!hosts.includes(req.headers.host))throw new InputError('Invalid Host',403);const origin=req.headers.origin;const expected=`http://${req.headers.host}`;if((origin&&origin!==expected)||req.headers['sec-fetch-site']==='cross-site')throw new InputError('Cross-origin request rejected',403);
+ const u=new URL(req.url,expected);if(u.search)throw new InputError('Query strings are not supported');const route=u.pathname;
+ if(req.method==='GET'){
+ if(route==='/api/state')return json(200,sortedState(store.state));
+ if(route==='/api/export'){res.setHeader('Content-Disposition','attachment; filename="dot-console-backup.json"');return json(200,{...sortedState(store.state),events:store.state.events??[]});}
+ if(route==='/api/resources')return json(200,resources);
+ const files={'/':'index.html','/app.js':'app.js','/app.mjs':'app.mjs','/style.css':'style.css','/styles.css':'styles.css','/client.mjs':'client.mjs','/helpers.mjs':'helpers.mjs'};const file=files[route];if(file){const content=await fs.readFile(path.join(ROOT,'public',file));res.writeHead(200,{'Content-Type':file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/javascript; charset=utf-8'});return res.end(content);}throw new InputError('Not found',404);
+ }
+ if(req.method!=='POST')throw new InputError('Method not allowed',405);if(req.headers['content-type']?.split(';')[0]!=='application/json')throw new InputError('Content-Type application/json required',415);if(Number(req.headers['content-length'])>MAX_BYTES+1024)throw new InputError('Body exceeds 1 MiB + 1 KiB import envelope allowance',413);
+ const chunks=[];let length=0;for await(const chunk of req){length+=chunk.length;if(length>MAX_BYTES+1024)throw new InputError('Body exceeds 1 MiB + 1 KiB import envelope allowance',413);chunks.push(chunk);}let input;try{input=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Buffer.concat(chunks)));}catch{throw new InputError('Malformed JSON');}
+ let result,match;if(route==='/api/projects')result=await store.project(input);else if((match=route.match(/^\/api\/projects\/([\w-]+)\/tasks$/)))result=await store.task(match[1],input);else if((match=route.match(/^\/api\/projects\/([\w-]+)\/tasks\/([\w-]+)\/check$/))){object(input,[]);result=await store.check(match[1],match[2]);}else if(route==='/api/import')result=await store.import(input);else throw new InputError('Not found',404);json(200,result);
+ }catch(e){if(!res.headersSent)json(e.status||500,{error:e.status?e.message:'Operation failed; existing state preserved. See server diagnostics.'});else res.end();if(!e.status)console.error(e);}});
+ server.requestTimeout=10000;server.headersTimeout=10000;server.on('close',()=>{clearInterval(timer);fs.rmdir(lock).catch(e=>{if(e.code!=='ENOENT')console.error(e);});});return{server,store,listen:()=>new Promise((resolve,reject)=>{server.once('error',async error=>{clearInterval(timer);await fs.rmdir(lock).catch(()=>{});reject(error);});server.listen(port,'127.0.0.1',()=>{server.removeListener('error',reject);resolve(server.address());});})};
+}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){try{const app=await createApp();const address=await app.listen();console.log(`Dot Console: http://127.0.0.1:${address.port} (empty until you report projects)`);for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>app.server.close());}catch(e){console.error(e.message);process.exitCode=1;}}
