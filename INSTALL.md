@@ -1,5 +1,7 @@
 # Dot Console 安装与启动
 
+**简体中文** | [English](https://github.com/AshWood97/Dot-Console/blob/main/INSTALL.en.md)
+
 Dot Console 以源码形式发布。当前桌面启动流程面向 Linux X11，需要 Node.js 22.13+（建议 24）、npm、Python 3.10+ 和 Bash；依赖和编译产物需要在本机安装及生成。
 
 ## 安装
@@ -54,6 +56,11 @@ bash ../start.sh --open                   # 明确再次请求打开页面
 
 ```sh
 bash local/install-desktop.sh --enable
+```
+
+需要关闭未来的登录启动时执行：
+
+```sh
 bash local/install-desktop.sh --disable
 ```
 

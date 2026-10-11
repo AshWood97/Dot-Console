@@ -1,5 +1,7 @@
 # Dot Console
 
+**简体中文** | [English](README.en.md)
+
 **把多项目任务、真实进展和机器资源放在同一个本地看板里。**
 
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
@@ -87,8 +89,10 @@ node local/report.mjs complete --project Example --task build \
 
 ```text
 Dot-Console/
-├── README.md                 # 项目介绍
-├── INSTALL.md                # 当前版本安装说明
+├── README.md                 # 中文项目介绍
+├── README.en.md              # 英文项目介绍
+├── INSTALL.md                # 中文安装说明
+├── INSTALL.en.md             # 英文安装说明
 ├── LICENSE                   # GNU AGPL v3
 ├── PROVENANCE.json           # 来源与版本边界
 ├── PACKAGE_CONTENTS.json     # 源码包文件校验清单
@@ -131,6 +135,8 @@ python3 -m unittest discover -s tests -p 'test_package_local.py' -v
 
 本仓库从 Gitea 上的 Dot Console `main` 分支迁移，保留现有提交历史；GitHub 发布的源码基线为 `3e5da01`，包含资源监控更新和简化后的控制台标题。来源信息见 [PROVENANCE.json](PROVENANCE.json)。
 
-Dot Console 是 [graydeon/dot-panel](https://github.com/graydeon/dot-panel) 的修改版本，保留上游源码、版权说明和 **GNU AGPL v3 only（AGPL-3.0-only）** 许可证。完整条款见 [LICENSE](LICENSE)，依赖与上游署名见 [THIRD_PARTY_NOTICES.md](dot-panel-main/THIRD_PARTY_NOTICES.md)。许可证同样适用于本项目的修改部分；第三方依赖保留各自许可证。
+Dot Console 是 [graydeon/dot-panel](https://github.com/graydeon/dot-panel) 的修改版本，保留上游源码、版权说明和 **GNU AGPL v3 only（AGPL-3.0-only）** 许可证。完整条款见 [LICENSE](LICENSE)，依赖与上游署名见 [THIRD_PARTY_NOTICES.md](dot-panel-main/THIRD_PARTY_NOTICES.md)。当前组合应用及其修改部分继续遵循 AGPL；第三方依赖保留各自许可证。
+
+上游代码没有得到相关版权人的改协议授权前，不能把整个项目改为 0BSD 等宽松协议；仅替换仓库的 LICENSE 文件不会产生这种授权。依据见[上游 AGPL 第 5 条](https://github.com/graydeon/dot-panel/blob/main/LICENSE)与[GNU 许可 FAQ](https://www.gnu.org/licenses/gpl-faq.en.html#Consider)。
 
 本项目与 OpenAI、ChatGPT 或 Cloudflare 没有官方隶属关系。问题和改进建议可提交至 [GitHub Issues](https://github.com/AshWood97/Dot-Console/issues)；部署身份与数据处理说明见 [安全说明](dot-panel-main/SECURITY.md)。

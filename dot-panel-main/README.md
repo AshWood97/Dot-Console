@@ -1,5 +1,7 @@
 > **Dot Console 修改版本：** 当前仓库的主要入口是本地项目与任务看板。安装、任务上报和本版本说明见[根目录 README](https://github.com/AshWood97/Dot-Console/blob/main/README.md)与[安装指南](https://github.com/AshWood97/Dot-Console/blob/main/INSTALL.md)。下方保留的是上游 Dot Panel 框架介绍；其中发行徽章、版本和平台说明属于上游项目。
 
+> **Dot Console derivative:** This repository primarily provides a local project and task dashboard. See the [English project guide](https://github.com/AshWood97/Dot-Console/blob/main/README.en.md) and [installation guide](https://github.com/AshWood97/Dot-Console/blob/main/INSTALL.en.md). The Dot Panel overview, release badges, versions, and platform statements below describe the upstream framework.
+
 <div align="center">
 
 <img src="docs/assets/header.svg" alt="Dot Panel — your assistant, in view" width="960" />
