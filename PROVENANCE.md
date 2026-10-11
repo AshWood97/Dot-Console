@@ -8,7 +8,7 @@ The rewrite maintainer records this implementation as newly authored from the su
 
 The source imported from Gitea is commit `91abfa828802779473aac403b85cba8bcc3e134c`, containing 19 application, test, and documentation files. Its root license and package metadata identify the independent implementation as **0BSD**.
 
-For GitHub publication, the application and test source bytes are preserved from that commit. Documentation was updated for the public destination, complete English instructions, and the correct default port. `README.en.md` was added, and its inclusion in package metadata was recorded. No legacy implementation was merged into the current source tree.
+For GitHub publication, the application and test source bytes are preserved from that commit. Documentation was updated for the public destination, complete English instructions, and the correct default port. `README.en.md` was added, and its inclusion in package metadata was recorded. The 0BSD license formatting was aligned with GitHub’s official template without changing its permission or warranty terms. No legacy implementation was merged into the current source tree.
 
 Source review found only Node.js built-in and local-module imports, with no declared third-party runtime dependencies. No current implementation file has the same complete Git blob hash as a legacy implementation file at `3e5da01`. This comparison is a bounded source check; it does not independently prove authorship or constitute clean-room certification.
 
