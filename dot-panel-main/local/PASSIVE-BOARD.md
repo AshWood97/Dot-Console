@@ -1,5 +1,11 @@
 # Passive status board
 
+> Current behavior (2026-10-11): the pause control and “项目进展” subtitle were removed.
+> Task data updates continuously. Compact hardware metrics are documented in
+> [RESOURCES.md](RESOURCES.md). Pause/resume descriptions and validation below
+> are historical evidence for the earlier UI, not current controls.
+
+
 Local-only single-screen display, replacing the interactive chat timeline at `/`.
 The existing dashboard remains at `/dashboard` but is not needed to read progress.
 

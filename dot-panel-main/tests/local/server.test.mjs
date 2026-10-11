@@ -7,7 +7,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createLocalServer} from '../../local/server.mjs';
 
-async function fixture(t) {
+async function fixture(t,options={}) {
   const directory = await mkdtemp(join(tmpdir(),'dot-server-review-'));
   const dist = join(directory,'dist');
   const file = join(directory,'events.jsonl');
@@ -16,7 +16,7 @@ async function fixture(t) {
   await writeFile(join(directory,'outside-secret.txt'),'NEVER EXPOSE OUTSIDE DIST');
   // Host validation deliberately uses a fixed configured Host while the socket gets an ephemeral port.
   const host='127.0.0.1:18787';
-  const server = createLocalServer({file,dist,port:18787,upstreamPort:1});
+  const server = createLocalServer({file,dist,port:18787,upstreamPort:1,...options});
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
   t.after(async()=>{await new Promise(resolve=>server.close(resolve));await rm(directory,{recursive:true,force:true});});
   return {directory,dist,file,host,port:server.address().port};
@@ -74,4 +74,15 @@ test('an unavailable panel upstream fails explicitly rather than proxying elsewh
   const context=await fixture(t);
   const result=await get(context,'/api/overview');
   assert.equal(result.status,502);assert.match(result.body,/unavailable/);
+});
+
+
+test('resource endpoint is read-only, same-origin and never proxies or leaks errors',async t=>{
+  const snapshot={sampledAt:'2026-10-11T00:00:00Z',memory:null,disk:null,cpu:null};
+  const context=await fixture(t,{readResources:async()=>snapshot});
+  const result=await get(context,'/api/resources');assert.equal(result.status,200);assert.deepEqual(JSON.parse(result.body),snapshot);assert.equal(result.headers['cache-control'],'no-store');assert.equal(result.headers['access-control-allow-origin'],undefined);
+  for(const method of ['HEAD','POST','PUT','DELETE','OPTIONS'])assert.equal((await get(context,'/api/resources',{method})).status,405);
+  for(const headers of [{host:'evil.example'},{origin:'https://evil.example'},{'sec-fetch-site':'cross-site'}])assert.equal((await get(context,'/api/resources',{headers})).status,403);
+  const broken=await fixture(t,{readResources:async()=>{throw new Error('/private/path secret');}});
+  const failure=await get(broken,'/api/resources');assert.equal(failure.status,503);assert.doesNotMatch(failure.body,/secret|private/);
 });

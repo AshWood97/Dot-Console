@@ -2,7 +2,8 @@
 
 Private source repository for the current Dot Console task dashboard. It includes
 independently scrolling task cards, project-group counts and sync status, ordering
-by the latest real task start, and factual progress/checkpoint/due/run reporting.
+by the latest real task start, factual progress/checkpoint/due/run reporting, and
+small read-only memory, filesystem and CPU metrics.
 
 This is a locally modified **AGPL-3.0-only** derivative of
 [graydeon/dot-panel](https://github.com/graydeon/dot-panel). Original source,
@@ -95,3 +96,14 @@ trees; generated `dist`; private QA generators, screenshots and local backups.
 Original PNG/ICO/SVG brand assets remain included. The root `.gitignore` protects
 these categories during normal development; inspect every staged change before
 sharing.
+
+## Resource monitor update (2026-10-11)
+
+The missing resource-monitor change was rebuilt against commit
+`d90f45d15490c51fd1d8cec968c19f4fd8eddd56`; the original uncommitted patch was
+not recoverable. This is a new implementation of the requested behavior, not a
+claim that the lost source was recovered. The “暂停更新” control and “项目进展”
+subtitle are removed; project grouping, ordering and independent card scrolling
+remain. See [resource measurement scope](dot-panel-main/local/RESOURCES.md).
+
+This source update does not replace or restart an existing running installation.

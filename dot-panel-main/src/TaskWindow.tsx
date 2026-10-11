@@ -1,5 +1,7 @@
+// SPDX-License-Identifier: AGPL-3.0-only
 import {useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import './task-window.css';
+import ResourceMonitor from './ResourceMonitor';
 import {normalizeProject,groupProjects,summarizeProjects} from './project-model';
 import {aggregateTasks,taskFreshness} from '../lib/task-reporting.mjs';
 import type {Status,TaskEvent} from '../lib/task-reporting.mjs';
@@ -18,11 +20,9 @@ function StatusIcon({status}:{status:Status}){return <svg className="pg-status-i
 export default function TaskWindow(){
  const [events,setEvents]=useState<TaskEvent[]>([]),[connection,setConnection]=useState<'connecting'|'catching-up'|'live'|'offline'>('connecting'),[lastChecked,setLastChecked]=useState(''),[error,setError]=useState(''),[invalid,setInvalid]=useState(0),[name,setName]=useState('好大的小西瓜'),[now,setNow]=useState(Date.now());
  const cursor=useRef('');
- const [frozen,setFrozen]=useState<{events:TaskEvent[];at:number}|null>(null);
  const ranks=useRef(new Map<string,number>());
- const visibleEvents=frozen?.events??events;
- const displayNow=frozen?.at??now;
- const unseen=frozen?events.filter(e=>!new Set(frozen.events.map(old=>old.id)).has(e.id)).length:0;
+ const visibleEvents=events;
+ const displayNow=now;
  useEffect(()=>{const controller=new AbortController();fetch('/api/state',{signal:controller.signal,cache:'no-store'}).then(r=>r.ok?r.json() as Promise<{dot_display_name?:string}>:null).then(s=>{if(s?.dot_display_name)setName(s.dot_display_name);}).catch(()=>{});return()=>controller.abort();},[]);
  useEffect(()=>{
    const controller=new AbortController();let timer:ReturnType<typeof setTimeout>;let failures=0;
@@ -65,7 +65,7 @@ export default function TaskWindow(){
   </article>;
  };
  return <main className="pg-shell">
-  <header className="pg-header"><div className="pg-identity"><img src="/brand/favicon.svg" width="29" height="29" alt=""/><h1>Dot Console</h1><span>{name} · 项目进展</span></div><div className="pg-sync-header" aria-label="同步信息">{error&&<span role="status" className="pg-sync-warning">数据同步中断 · 保留最后记录，正在重连</span>}{invalid>0&&<span role="status" className="pg-sync-warning">{invalid} 条格式异常记录未展示</span>}<span className={`pg-connection ${connection}`}><i/>{connection==='live'?'同步正常':connection==='catching-up'?'正在补读事件':connection==='connecting'?'正在连接':'连接中断'}{lastChecked?` · ${clock(lastChecked)} UTC`:''}</span></div><div className="pg-reading-control">{frozen&&<span role="status">显示暂停于 {reportStamp(new Date(frozen.at).toISOString(),now)} · 非最新{unseen>0?` · ${unseen} 条新上报`:''}</span>}<button type="button" aria-pressed={!!frozen} onClick={()=>setFrozen(frozen?null:{events,at:Date.now()})}>{frozen?'恢复更新':'暂停更新'}</button></div><div className="pg-summary" aria-label="项目总览"><strong>总共 {projectSummary.total} 组项目</strong><span>进行中 <b>{projectSummary.running}</b> 个</span><span>暂停等待 <b>{projectSummary.waiting}</b> 个</span><span>已完成 <b>{projectSummary.completed}</b> 个</span></div></header>
+  <header className="pg-header"><div className="pg-identity"><img src="/brand/favicon.svg" width="29" height="29" alt=""/><h1>Dot Console</h1><span>{name}</span></div><div className="pg-sync-header" aria-label="同步信息">{error&&<span role="status" className="pg-sync-warning">数据同步中断 · 保留最后记录，正在重连</span>}{invalid>0&&<span role="status" className="pg-sync-warning">{invalid} 条格式异常记录未展示</span>}<span className={`pg-connection ${connection}`}><i/>{connection==='live'?'同步正常':connection==='catching-up'?'正在补读事件':connection==='connecting'?'正在连接':'连接中断'}{lastChecked?` · ${clock(lastChecked)} UTC`:''}</span></div><ResourceMonitor/><div className="pg-summary" aria-label="项目总览"><strong>总共 {projectSummary.total} 组项目</strong><span>进行中 <b>{projectSummary.running}</b> 个</span><span>暂停等待 <b>{projectSummary.waiting}</b> 个</span><span>已完成 <b>{projectSummary.completed}</b> 个</span></div></header>
   <section className="pg-projects" aria-label="按项目组织的任务">
    {projects.map(project=>{const hasRunning=project.counts.running>0;return <section className={`pg-project ${hasRunning?'pg-running':''}`} key={project.id} data-project-id={project.id} aria-label={project.name}>
     <header className="pg-project-header"><div><h2>{project.name}</h2>{project.repo&&<p className="pg-repo">{project.repo}</p>}</div><div className="pg-project-counts"><span>{project.counts.total} 项任务</span>{project.tasks.some(t=>t.blocker||['blocked','needs_confirmation','failed'].includes(t.status))&&<span className="pg-attention-count">{project.tasks.filter(t=>t.blocker||['blocked','needs_confirmation','failed'].includes(t.status)).length} 关注项</span>}{project.counts.running>0&&<b className="pg-running-label"><StatusIcon status="running"/>{project.counts.running} 进行中</b>}{project.counts.blocked>0&&<b className="pg-waiting-label"><StatusIcon status="blocked"/>{project.counts.blocked} 受阻</b>}{project.counts.needsConfirmation>0&&<b className="pg-waiting-label"><StatusIcon status="needs_confirmation"/>{project.counts.needsConfirmation} 待确认</b>}{project.counts.waiting-project.counts.blocked-project.counts.needsConfirmation>0&&<span>{project.counts.waiting-project.counts.blocked-project.counts.needsConfirmation} 排队</span>}{project.counts.completed>0&&<span>{project.counts.completed} 已完成</span>}{project.counts.canceled>0&&<span>{project.counts.canceled} 已取消</span>}{project.counts.other>0&&<span>{project.counts.other} 其他状态</span>}</div></header>

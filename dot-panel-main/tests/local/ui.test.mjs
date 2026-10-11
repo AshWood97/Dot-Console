@@ -3,9 +3,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {resolve} from 'node:path';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+const reactUrl=pathToFileURL(createRequire(import.meta.url).resolve('react')).href;
 import {renderToStaticMarkup} from 'react-dom/server';
 
-const compiled=await build({entryPoints:[resolve('src/TaskWindow.tsx')],bundle:true,write:false,platform:'node',format:'esm',jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'hook-harness',setup(build){build.onResolve({filter:/^react$/},args=>args.importer.endsWith('/src/TaskWindow.tsx')?{path:resolve('tests/local/ui-hooks.mjs')}:undefined);}}]});
+const compiled=await build({entryPoints:[resolve('src/TaskWindow.tsx')],bundle:true,write:false,platform:'node',format:'esm',jsx:'automatic',loader:{'.css':'empty'},plugins:[{name:'hook-harness',setup(build){build.onResolve({filter:/^react$/},args=>args.importer.endsWith('/src/TaskWindow.tsx')?{path:resolve('tests/local/ui-hooks.mjs')}:args.importer.endsWith('/src/ResourceMonitor.tsx')?{path:reactUrl,external:true}:undefined);}}]});
 const {default:TaskWindow,aggregateTasks,displayText,distinctText,reportStamp,reportAge,taskPriority}=await import('data:text/javascript;base64,'+Buffer.from(compiled.outputFiles[0].text+'\n//# sourceURL=TaskWindow-review-bundle.mjs').toString('base64'));
 const sample=(id='one',extra={})=>({id,project:'Review',task:'Task',title:'Progress',message:'A status update',kind:'status',status:'running',source:'tool',timestamp:'2026-10-09T10:00:00.000Z',reported_at:'2026-10-09T10:00:01.000Z',...extra});
 const page=(events,cursor='cursor-one',extra={})=>({events,cursor,reset:false,hasMore:false,invalid:0,serverTime:'2026-10-09T10:00:02.000Z',...extra});
@@ -257,11 +260,11 @@ test('duplicate blocker and next action render once with both meanings identifie
 });
 
 
-test('pause freezes content until explicit resume while polls continue',async t=>{
- const h=harness(t);h.requests[0].resolve(page([sample('initial',{stage:'Original stage'})]));await settle();h.render();h.click('暂停更新');
+test('content automatically follows live polls with no pause control',async t=>{
+ const h=harness(t);h.requests[0].resolve(page([sample('initial',{stage:'Original stage'})]));await settle();h.render();
  h.nextPoll();h.requests.at(-1).resolve(page([sample('update',{stage:'Updated stage'})],'new'));await settle();h.render();
- assert.match(text(h.tree),/Original stage/);assert.doesNotMatch(text(h.tree),/Updated stage/);assert.match(text(h.tree),/非最新 · 1 条新上报/);
- h.click('恢复更新');assert.match(text(h.tree),/Updated stage/);assert.doesNotMatch(text(h.tree),/非最新/);
+ assert.doesNotMatch(text(h.tree),/Original stage/);assert.match(text(h.tree),/Updated stage/);assert.doesNotMatch(text(h.tree),/暂停更新|恢复更新|项目进展/);
+ assert.match(text(h.tree),/Updated stage/);assert.doesNotMatch(text(h.tree),/非最新/);
 });
 test('status updates do not reorder existing tasks and new tasks append',async t=>{
  const h=harness(t);h.requests[0].resolve(page([sample('first',{task:'one'}),sample('second',{task:'two',status:'completed'})]));await settle();h.render();
@@ -277,10 +280,10 @@ test('completed state has visible words and no invented test evidence',async t=>
  const finished=nodes(h.tree).find(n=>n.type==='article'&&n.props.className.includes('completed'));assert.match(text(finished),/已完成/);assert.doesNotMatch(text(finished),/验证/);
 });
 
-test('pause notices a same-sized server reset and resumes replacement records',async t=>{
- const h=harness(t);h.requests[0].resolve(page([sample('old')]));await settle();h.render();h.click('暂停更新');
- h.nextPoll();h.requests.at(-1).resolve(page([sample('replacement',{stage:'Reset content'})],'reset',{reset:true}));await settle();h.render();assert.match(text(h.tree),/1 条新上报/);assert.doesNotMatch(text(h.tree),/Reset content/);
- h.click('恢复更新');assert.match(text(h.tree),/Reset content/);
+test('a same-sized server reset replaces displayed records automatically',async t=>{
+ const h=harness(t);h.requests[0].resolve(page([sample('old')]));await settle();h.render();
+ h.nextPoll();h.requests.at(-1).resolve(page([sample('replacement',{stage:'Reset content'})],'reset',{reset:true}));await settle();h.render();assert.match(text(h.tree),/Reset content/);
+ assert.match(text(h.tree),/Reset content/);
 });
 
 test('sync metadata and feed errors live in top bar, with no duplicate footer',async t=>{
@@ -290,8 +293,8 @@ test('sync metadata and feed errors live in top bar, with no duplicate footer',a
  assert.equal(nodes(h.tree).filter(n=>n.type==='footer').length,0);
  h.nextPoll();h.requests.at(-1).reject(new Error('Temporary failure'));await settle();h.render();
  assert.match(text(nodes(h.tree).find(n=>n.props?.className==='pg-header')),/数据同步中断/);
- h.click('暂停更新');assert.match(text(nodes(h.tree).find(n=>n.props?.className==='pg-header')),/非最新/);
- h.click('恢复更新');assert.doesNotMatch(text(nodes(h.tree).find(n=>n.props?.className==='pg-header')),/非最新/);
+ assert.doesNotMatch(text(nodes(h.tree).find(n=>n.props?.className==='pg-header')),/非最新/);
+ assert.doesNotMatch(text(nodes(h.tree).find(n=>n.props?.className==='pg-header')),/非最新/);
 });
 
 test('each project has a focusable independent content scroller below its fixed heading',async t=>{
@@ -303,12 +306,12 @@ test('each project has a focusable independent content scroller below its fixed 
 });
 
 
-test('project summary follows the displayed paused snapshot and resumes latest groups',async t=>{
- const h=harness(t);h.requests[0].resolve(page([sample('one',{project:'DramaFlow A'})]));await settle();h.render();h.click('暂停更新');
+test('project summary automatically follows latest groups',async t=>{
+ const h=harness(t);h.requests[0].resolve(page([sample('one',{project:'DramaFlow A'})]));await settle();h.render();
  h.nextPoll();h.requests.at(-1).resolve(page([sample('b',{project:'DramaFlow B',status:'completed'})],'new'));await settle();h.render();
  const summary=()=>text(nodes(h.tree).find(n=>n.props?.className==='pg-summary'));
- assert.match(summary(),/总共 1 组项目/);assert.match(summary(),/已完成 0 个/);
- h.click('恢复更新');assert.match(summary(),/总共 2 组项目/);assert.match(summary(),/已完成 1 个/);
+ assert.match(summary(),/总共 2 组项目/);assert.match(summary(),/已完成 1 个/);
+ assert.match(summary(),/总共 2 组项目/);assert.match(summary(),/已完成 1 个/);
 });
 
 test('launch evidence changes only for a new active task or a real lifecycle restart',()=>{
@@ -327,11 +330,11 @@ test('launch evidence changes only for a new active task or a real lifecycle res
  const invalid=ev('invalid','bad','running',{reported_at:undefined});assert.equal(aggregateTasks([invalid])[0].launchAt,undefined);assert.equal(aggregateTasks([invalid])[0].launchOrder,1);
 });
 
-test('project launch ordering freezes with pause and ignores ordinary progress or completion time',async t=>{
+test('project launch ordering updates for new tasks but ignores ordinary progress',async t=>{
  const h=harness(t),names=()=>nodes(h.tree).filter(n=>n.props?.['data-project-id']).map(n=>n.props['data-project-id']);
  h.requests[0].resolve(page([sample('a',{project:'DramaFlow A',timestamp:'2026-10-10T01:00:00Z'}),sample('b',{project:'DramaFlow B',timestamp:'2026-10-10T02:00:00Z'})]));await settle();h.render();assert.deepEqual(names(),['dramaflow-b','dramaflow-a']);
  h.nextPoll();h.requests.at(-1).resolve(page([sample('a-progress',{project:'DramaFlow A',timestamp:'2026-10-10T03:00:00Z'})],'p'));await settle();h.render();assert.deepEqual(names(),['dramaflow-b','dramaflow-a']);
- h.click('暂停更新');h.nextPoll();h.requests.at(-1).resolve(page([sample('a-new',{project:'DramaFlow A',task:'new-task',timestamp:'2026-10-10T04:00:00Z'})],'new'));await settle();h.render();assert.deepEqual(names(),['dramaflow-b','dramaflow-a']);h.click('恢复更新');assert.deepEqual(names(),['dramaflow-a','dramaflow-b']);
+ h.nextPoll();h.requests.at(-1).resolve(page([sample('a-new',{project:'DramaFlow A',task:'new-task',timestamp:'2026-10-10T04:00:00Z'})],'new'));await settle();h.render();assert.deepEqual(names(),['dramaflow-a','dramaflow-b']);
 });
 
 test('project reorder restores each keyed scroll region from its own recorded position',async t=>{
@@ -348,13 +351,13 @@ test('network polls do not verify work, and the five-minute threshold stays neut
  assert.match(text(h.tree),/待核实/);assert.match(text(h.tree),/进行中/);assert.doesNotMatch(text(h.tree),/验证未通过/);
  assert.match(text(nodes(h.tree).find(n=>n.props?.className?.startsWith('pg-freshness'))),/进展 5分钟前 · 核实 5分钟前/);
 });
-test('pause freezes freshness ages and checkpoint resumes without progress or group movement',async t=>{
+test('checkpoint updates freshness without progress or group movement',async t=>{
  let now=Date.parse('2026-10-10T01:04:00Z');t.mock.method(Date,'now',()=>now);const h=harness(t),at='2026-10-10T01:00:00Z';
  h.requests[0].resolve(page([sample('start',{timestamp:at,reported_at:at,stage:'Retained stage',done:'Retained result'}),sample('second',{project:'Other',timestamp:'2026-10-10T01:01:00Z'})]));await settle();h.render();
- const order=()=>nodes(h.tree).filter(n=>n.props?.['data-project-id']).map(n=>n.props['data-project-id']);const before=order();h.click('暂停更新');now+=120000;
+ const order=()=>nodes(h.tree).filter(n=>n.props?.['data-project-id']).map(n=>n.props['data-project-id']);const before=order();now+=120000;
  h.nextPoll();h.requests.at(-1).resolve(page([sample('check',{kind:'checkpoint',timestamp:new Date(now).toISOString(),reported_at:new Date(now).toISOString(),verification:{observed_at:new Date(now).toISOString(),evidence:'Inspected current output',scope:'task'}})],'checked'));await settle();h.render();
- assert.match(text(h.tree),/进展 4分钟前/);assert.match(text(h.tree),/1 条新上报/);assert.deepEqual(order(),before);
- h.click('恢复更新');assert.match(text(h.tree),/进展 6分钟前 · 核实 刚刚/);assert.match(text(h.tree),/Retained stage/);assert.match(text(h.tree),/Retained result/);assert.deepEqual(order(),before);
+ assert.match(text(h.tree),/进展 6分钟前/);assert.deepEqual(order(),before);
+ assert.match(text(h.tree),/进展 6分钟前 · 核实 刚刚/);assert.match(text(h.tree),/Retained stage/);assert.match(text(h.tree),/Retained result/);assert.deepEqual(order(),before);
 });
 test('only active tasks get freshness; old verification cannot add an alive badge to completed work',async t=>{
  const h=harness(t);h.requests[0].resolve(page([sample('run'),sample('done',{task:'done',status:'completed'}),sample('late',{task:'done',kind:'checkpoint',verification:{observed_at:'2026-10-09T10:00:00Z',evidence:'Late process alive',scope:'process'}})]));await settle();h.render();

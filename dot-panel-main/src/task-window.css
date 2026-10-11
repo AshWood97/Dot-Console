@@ -30,3 +30,7 @@
 
 /* One compact active-task line. Age is read-only; no success/error inference. */
 .pg-freshness{font-size:12px;line-height:1.5;color:#596b5f;font-variant-numeric:tabular-nums}.pg-freshness .pg-report{display:inline}.pg-verification-due{color:#596b5f}.pg-verification-due>span{font-weight:550}
+
+/* Small factual metrics; preserve existing fixed cards, grouping and scroll regions. */
+.pg-resources{display:flex;flex:0 1 auto;flex-wrap:wrap;gap:3px 12px;order:3;min-width:0;font-size:11px;line-height:1.5;color:var(--muted);font-variant-numeric:tabular-nums}.pg-resources>span{white-space:nowrap}
+@media(max-width:900px){.pg-resources{flex-basis:100%}}

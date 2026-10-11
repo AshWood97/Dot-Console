@@ -5,8 +5,9 @@ import {resolve, extname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {readEvents,eventPage,DEFAULT_FILE} from './events.mjs';
+import {createResourceMonitor} from './resources.mjs';
 const ROOT = resolve(import.meta.dirname,'..');
-export function createLocalServer({file=DEFAULT_FILE,port=8787,upstreamPort=8788,dist=resolve(ROOT,'dist')}={}) {
+export function createLocalServer({file=DEFAULT_FILE,port=8787,upstreamPort=8788,dist=resolve(ROOT,'dist'),readResources=createResourceMonitor({root:ROOT})}={}) {
   const hosts = new Set([`127.0.0.1:${port}`,`localhost:${port}`]);
   return createServer(async (req,res) => {
     const fail = (status,message) => {res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); res.end(JSON.stringify({error:message}));};
@@ -16,6 +17,12 @@ export function createLocalServer({file=DEFAULT_FILE,port=8787,upstreamPort=8788
     if (url.pathname === '/api/task-events') {
       if (req.method !== 'GET') return fail(405,'Read-only endpoint');
       try {const page = eventPage(await readEvents(file),url.searchParams.get('cursor'));res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); res.end(JSON.stringify(page));} catch (e) {return fail(503,e.message);}
+      return;
+    }
+    if (url.pathname === '/api/resources') {
+      if (req.method !== 'GET') return fail(405,'Read-only endpoint');
+      try {const sample=await readResources();res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(sample));}
+      catch {return fail(503,'Resource sample unavailable');}
       return;
     }
     if (url.pathname.startsWith('/api/') || url.pathname === '/mcp') {

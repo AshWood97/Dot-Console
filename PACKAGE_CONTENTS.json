@@ -7,7 +7,7 @@
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "0adaf70bb5cc13270d9e2529d51018a33636f7e7e8e9044f6dd1b708e03f5476",
+      "sha256": "bbe25ecde6cd16d9c17ce59d6ff49784c92e2af3b41e1782e1468380e1516a5a",
       "mode": "0644"
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "dot-panel-main/SOURCE_MANIFEST.json",
-      "sha256": "787af1369c89a20f1969ef96c4f6f20042975f892dee4c8a15b45a7770329967",
+      "sha256": "ee47085b6329d47f1aea5ebe6b1225088a52c621a4db6ae44932db443584ba27",
       "mode": "0644"
     },
     {
@@ -382,17 +382,22 @@
     },
     {
       "path": "dot-panel-main/local/PASSIVE-BOARD.md",
-      "sha256": "87609dcc027444704ffa7993cbdf4e0223a08f967f4750e4dbedf9ba5384374b",
+      "sha256": "9a73113f3f9ded757affcb9c17cb142d91ec1631d534c70ccc2956a745992aee",
       "mode": "0644"
     },
     {
       "path": "dot-panel-main/local/README.md",
-      "sha256": "ce49b2c79a2b8e84bf7bb269185003b33570f5946eb207f3fe89c2af49b3d71e",
+      "sha256": "689de1c8ac903d7b809bdb8151404635b05ecefcbd3871e1374c8d17393447e0",
       "mode": "0644"
     },
     {
       "path": "dot-panel-main/local/REPORTING.md",
       "sha256": "20dc74f3105327a1272d4a34381c0afcb25a955c428c11921f2aad6f64525324",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/local/RESOURCES.md",
+      "sha256": "1ce01d3f11cdde3af55a65c49f079e37eecd3df1618deb169b1f11b8f5dedb70",
       "mode": "0644"
     },
     {
@@ -426,8 +431,13 @@
       "mode": "0644"
     },
     {
+      "path": "dot-panel-main/local/resources.mjs",
+      "sha256": "33cfd5826ae628dc0c60534db8c33b9eac0bce927346ab49da252724e5078f67",
+      "mode": "0644"
+    },
+    {
       "path": "dot-panel-main/local/server.mjs",
-      "sha256": "6954a6bf7a50aa212b78a2bfd7b5121c6a71e0e7e92420fdb6eca650bf1796a7",
+      "sha256": "86e75bb0be753c365bd91916b47358c63a31791ff9b59256bd68ee5f5ed406e5",
       "mode": "0644"
     },
     {
@@ -636,8 +646,13 @@
       "mode": "0644"
     },
     {
+      "path": "dot-panel-main/src/ResourceMonitor.tsx",
+      "sha256": "ab01c178a3d79d726debfe8fb353da4fbb8f1bee0b198010e95bdec47472eb13",
+      "mode": "0644"
+    },
+    {
       "path": "dot-panel-main/src/TaskWindow.tsx",
-      "sha256": "e817d48857deecd82c42c6d95e14c07e3c5653efa66faa8dd7ba37a297c88c9e",
+      "sha256": "67d0daffbf3c8174b61253b2c72e907e004d2e1dbcd7db3e69760209e6541dda",
       "mode": "0644"
     },
     {
@@ -667,7 +682,7 @@
     },
     {
       "path": "dot-panel-main/src/task-window.css",
-      "sha256": "3c4600932d29f3a3564c0bd03bcafc4d61dbd9584ad8216690e258db72b66d4d",
+      "sha256": "650bf7794a7eb3aca6bc7087bdd1424e5aff17dc1de5910f00f3f7a3eb624f19",
       "mode": "0644"
     },
     {
@@ -701,8 +716,18 @@
       "mode": "0644"
     },
     {
+      "path": "dot-panel-main/tests/local/resource-ui.test.mjs",
+      "sha256": "faf87f4fb65b55610858f8ae66c9474916fcda4347f72583dd8b871241895490",
+      "mode": "0644"
+    },
+    {
+      "path": "dot-panel-main/tests/local/resources.test.mjs",
+      "sha256": "72e59ce5a1975e276dc888082fbc725c285025d5c4aaa642da5e6d3a6be20611",
+      "mode": "0644"
+    },
+    {
       "path": "dot-panel-main/tests/local/server.test.mjs",
-      "sha256": "14f82663a947320c88d08da41a28f3d878c747b0f0b9578009e290f300d4e432",
+      "sha256": "11715f38f88ace25c01b6676ff108d10cf16a3b7b20609a59a5a23f1e7ea64da",
       "mode": "0644"
     },
     {
@@ -712,7 +737,7 @@
     },
     {
       "path": "dot-panel-main/tests/local/ui.test.mjs",
-      "sha256": "4afa6ea513da78f39f1d03317d2e6de0ec839c3def45fe0fc20fc7110f52077e",
+      "sha256": "ef3847cdb6591635c551a8857afb1a29c119d1a94cea83b290e30a0a5b42b1ed",
       "mode": "0644"
     },
     {

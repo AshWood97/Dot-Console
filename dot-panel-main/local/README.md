@@ -1,5 +1,11 @@
 # Local task progress window
 
+> Current behavior (2026-10-11): the pause control and “项目进展” subtitle were removed.
+> Task data updates continuously. Compact hardware metrics are documented in
+> [RESOURCES.md](RESOURCES.md). Pause/resume descriptions and validation below
+> are historical evidence for the earlier UI, not current controls.
+
+
 This addition runs only on the dot cloud computer's loopback interface. It does not publish a Site, create a repository, connect external chat, or expose an agent API.
 
 ## Start
