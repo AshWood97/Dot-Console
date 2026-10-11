@@ -1,140 +1,97 @@
 # Dot Console
 
-[简体中文](README.md) | **English**
+[简体中文](README.md#中文) | **English**
 
-**Keep multiple projects, factual task progress, and machine resources in one local dashboard.**
+**An independently rewritten local dashboard for multiple projects, factual task reports, and machine resources.**
 
-[![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
-[![Node.js: 22.13+](https://img.shields.io/badge/Node.js-22.13%2B-green.svg)](dot-panel-main/package.json)
+[![License: 0BSD](https://img.shields.io/badge/License-0BSD-blue.svg)](LICENSE)
+[![Node.js: 24+](https://img.shields.io/badge/Node.js-24%2B-green.svg)](package.json)
 
-Dot Console is a task dashboard for personal and AI-assisted development workflows. It groups explicitly reported events by project and shows the current stage, latest results, next steps, blockers, and verification timestamps, alongside compact memory, disk, and CPU readings. It is designed to stay open on a Linux desktop or cloud desktop while you follow work across multiple projects.
+Dot Console uses Node.js 24 built-ins with no third-party runtime dependencies. Report projects and tasks through a local CLI or API, then view their status, stages, results, blockers, next steps, and resource measurements in the browser. Each project has its own scrollable card, with grouping, search, status filters, and ordering by real task starts.
 
-## Features
+The current independent implementation uses **0BSD**. Historical legacy commits retain their original AGPL-3.0-only licensing.
 
-| Feature | Description |
-| --- | --- |
-| Project grouping | Summarizes running, waiting, blocked, pending-confirmation, completed, and canceled tasks; orders projects using actual task-start events. |
-| Independent task cards | Each project card scrolls independently and displays task stages, latest results, next steps, and blockers. |
-| Progress and verification | Separates substantive progress from explicit checks. Overdue verification displays a neutral reminder rather than automatically failing a task. |
-| Factual reporting CLI | Supports `start`, `milestone`, `checkpoint`, `blocked`, `complete`, `cancel`, `due`, and `run`. |
-| Incremental synchronization | Reads local events about every 2.5 seconds, with deduplication, reconnect retries, and resets when the event file changes. |
-| Resource monitoring | Displays memory, filesystem usage, and CPU. Unavailable measurements and expired readings appear as unknown. |
-| Local startup | Includes a portable launcher, health checks, and optional Linux X11 display settings and desktop-login startup. |
-| Original dashboard | `/dashboard` retains upstream project, decision, calendar, usage, and layout modules; their data requires separate configuration. |
 
-The current task interface updates continuously. The earlier pause control has been removed.
+### Run and test
 
-## How it works
+Use Node.js 24. From the project directory, run `npm start`, then open <http://127.0.0.1:8795> in a browser on that same machine. The server binds to loopback only. No runtime dependency installation is needed. Run `npm test` in another terminal.
 
-```text
-Human / Agent / Your own script
-        | Explicitly calls local/report.mjs
-        v
-Local task-events.jsonl
-        | Read-only event endpoint
-        v
-Dot Console project and task dashboard
-```
+The dashboard records reported state. Opening or refreshing it does not start an assistant, execute a task, or connect to a cloud service. A reported status is not independent verification that an external task is running. Resource information describes the machine hosting this server, not another computer or an assistant's cloud tasks.
 
-The dashboard displays reports that have actually been written. It does not automatically scan every agent session, schedule work, or execute tasks. Connection status describes data synchronization; verifying that a task is still running requires explicit evidence. `run` can observe only the command process it starts itself.
+### Local data
 
-Services bind to `127.0.0.1` by default for single-user local use. This repository publishes source code. Task records, databases, environment configuration, and personal dashboard data created at runtime stay local and are excluded by `.gitignore`. Never use localhost fixture identities in a public deployment.
-
-## Quick start
-
-The desktop startup workflow targets **Linux X11**. Requirements: Node.js **22.13+** (24 recommended), npm, Python **3.10+**, and Bash. `xrandr` and `xdg-open` are optional desktop tools. Complete desktop installation on macOS, Windows, and Wayland has not been validated.
+`DATA_DIR` defaults to `~/.local/share/dot-console-independent`, outside the source tree. Override it when starting the server:
 
 ```sh
-git clone https://github.com/AshWood97/Dot-Console.git
-cd Dot-Console/dot-panel-main
-npm ci
-npm run build
-cp .dev.vars.example .dev.vars
-npx --no-install wrangler d1 migrations apply DB --local
-bash ../start.sh --no-open --no-display
+DATA_DIR="$HOME/.local/share/dot-console-independent-demo" npm start
 ```
 
-Open [http://127.0.0.1:8787/](http://127.0.0.1:8787/) on the machine running the service. A new installation starts with no task records. The original dashboard is available at `/dashboard`.
+Keep real data out of source control and release packages. Persistence uses bounded JSON, with a maximum on-disk size of 1 MiB including the trailing newline. Its structure has `version: 1`, a `revision`, and a `projects` array containing nested `tasks`. `state.json` is atomically replaced on writes; `state.bak` retains the previous good state. This is a recovery aid, not a historical archive or a replacement for exported backups.
 
-Run `bash ../start.sh` to also attempt an advertised 16:10 display mode and open the browser. Dependencies and build output are not bundled; `npm ci` needs access to the npm registry. See [INSTALL.en.md](INSTALL.en.md) for ports, foreground operation, login startup, and recovery.
+### Report projects and tasks
 
-## Report your first task
-
-Run these commands inside `dot-panel-main/`. Keep the same project and task identifiers in subsequent reports; reuse `--id` when retrying the same report. Report the example results only after you have actually completed the corresponding steps.
+With the server running, report fictional sample data from another terminal:
 
 ```sh
-node local/report.mjs start --project Example --task build \
-  --id example-build-start --title 'Build the example project' \
-  --message 'Started the project build' --stage 'Building'
-
-node local/report.mjs milestone --project Example --task build \
-  --id example-build-result --message 'Verified that the build succeeded' \
-  --done 'Build output generated' --next 'Inspect the page'
-
-node local/report.mjs checkpoint --project Example --task build \
-  --id example-build-check --evidence 'Inspected the generated page'
-
-node local/report.mjs complete --project Example --task build \
-  --id example-build-complete --message 'Page inspection completed' \
-  --done 'Build and page inspection completed'
+node cli.mjs project '{"id":"demo","name":"Example","group":"Personal"}'
+node cli.mjs task demo '{"id":"task-1","title":"Example","status":"running","stage":"Implementation","eventId":"unique-report-id"}'
+node cli.mjs check demo task-1
+node cli.mjs export /absolute/path/dot-console-backup.json
 ```
 
-Reports default to `task-events.jsonl` in the repository root. Set `DOT_CONSOLE_EVENTS` or use `--file` to select another location. See the [reporting guide](dot-panel-main/local/REPORTING.md) for additional fields, blockers, command wrapping, and verification rules.
+Keep project and task IDs stable. Give each new task report a unique `eventId`. The last 2,000 event IDs form a bounded deduplication window: an identical replay is deduplicated, and a conflicting replay is rejected. Older events outside that window can be accepted again. Reporters must keep IDs unique and avoid resending very old reports.
 
-## Technology and layout
+An ordinary `running` report does not count as a restart. Explicit `restart: true` is required for restart lifecycle and ordering updates. `node cli.mjs check PROJECT_ID TASK_ID` only records `lastCheckedAt`: it does not change task status, stage, or restart ordering, and it does not inspect an external process.
 
-The frontend uses React 19, TypeScript, and Vite. The local gateway and reporting tools use Node.js. The original dashboard backend uses Cloudflare Workers, D1, and Drizzle ORM. Desktop startup and source-packaging tools use Python and Bash.
+### Export, import, and recovery
 
-```text
-Dot-Console/
-├── README.md                 # Chinese project guide
-├── README.en.md              # English project guide
-├── INSTALL.md                # Chinese installation guide
-├── INSTALL.en.md             # English installation guide
-├── LICENSE                   # GNU AGPL v3
-├── PROVENANCE.json           # Source and version boundaries
-├── PACKAGE_CONTENTS.json     # Source-package integrity manifest
-├── start.sh                  # Resolves the nested source location
-└── dot-panel-main/
-    ├── src/                  # React UI and resource monitoring
-    ├── local/                # Gateway, events, reporting, desktop startup
-    ├── lib/                  # Project identity, task aggregation, shared logic
-    ├── worker/               # Original dashboard Worker / MCP backend
-    ├── db/ & drizzle/        # Database schema and migrations
-    ├── tests/                # Regression tests
-    ├── scripts/              # Validation, build, and packaging tools
-    └── agent-skills/          # Upstream setup, maintenance, widget guides
-```
+Use `node cli.mjs export BACKUP.json` or `GET /api/export` for portable backups. Exports contain your recorded data; store and share them accordingly. `node cli.mjs import BACKUP.json` performs a merge and rejects colliding project IDs instead of overwriting existing projects. To restore a complete export in isolation, start with a new empty data directory and import there. Browser imports require a file selection and explicit confirmation; ordinary browsing does not mutate task state.
 
-Keep the `dot-panel-main/` directory: the outer launcher depends on that layout. Customize project names and aliases in the [project identity registry](dot-panel-main/lib/project-identity.mjs). Source retains name mappings from the original environment, without those projects' actual task histories.
+Malformed persisted state stops startup instead of silently resetting data. To recover:
 
-## Development and verification
+1. Stop the server and any other process writing to the same data directory.
+2. Preserve the damaged file and inspect `state.bak` for the expected previous good state.
+3. When satisfied, copy `state.bak` to `state.json`.
+4. Restart with the same `DATA_DIR`, inspect the recovered records, and make an export.
 
-Publication preparation on 2026-10-11 used macOS, Node 24.19.0, and Python 3.12. A fresh `npm ci`, production build, main tests, widget template tests, database recovery rehearsal, and Worker runtime checks passed. Local regressions passed 103 tests, with one original-host private-history test skipped. Usage tracking passed 24 tests, source packaging passed 14 tests, and documentation integrity checks passed. Desktop startup passed 11 of 12 tests: disabling autostart failed because the script uses GNU `sed -i` syntax, which differs from macOS BSD sed. This verification establishes neither macOS desktop installation support nor fresh evidence of actual Linux desktop-login behavior.
+Never replace state files while the service is running. Recovery loses changes made after the backup. Preserve both files for investigation if the backup is invalid too.
 
-Run inside `dot-panel-main/`:
+An exclusive `server.lock` directory inside `DATA_DIR` prevents simultaneous server instances. A crash can leave it behind; the application never automatically removes a presumed stale lock. First verify that every server using that data directory has stopped, then use `rmdir /actual/data/directory/server.lock` to remove the empty lock directory and restart. Never remove a live server’s lock or delete the data directory as a recovery shortcut.
+
+### Local HTTP API
+
+The CLI uses the local server. Send JSON for write requests. IDs in paths must be URL-encoded when necessary.
+
+| Method | Path | Body / purpose |
+| --- | --- | --- |
+| GET | `/api/state` | Read current project and task state |
+| GET | `/api/resources` | Read resource information for the server's host |
+| GET | `/api/export` | Export portable state |
+| POST | `/api/projects` | Project object, e.g. `{"id":"demo","name":"Example","group":"Personal"}` |
+| POST | `/api/projects/:id/tasks` | Task report object, including its stable task ID and report event ID |
+| POST | `/api/projects/:id/tasks/:taskId/check` | `{}`; update `lastCheckedAt` only |
+| POST | `/api/import` | `{"mode":"merge","data":EXPORTED_STATE}`; reject collisions |
+
+Treat a non-success response as a failed operation and inspect its error before retrying. For a safe network retry of a task report, resend the same event ID and identical payload.
+
+### Security, contribution, and license
+
+This is a trusted-local-machine application. Do not expose it through a public listener, proxy, tunnel, or preview service. Loopback is not isolation from other local software. See [SECURITY.md](SECURITY.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+
+The current implementation was independently rewritten from requirements and is published under **0BSD**. It permits use, commercial use, modification, and distribution without attribution or source-disclosure conditions. The current source tree no longer contains the legacy Console / Dot Panel implementation or its assets. Earlier commits keep their original AGPL-3.0-only terms. See [PROVENANCE.md](PROVENANCE.md) for recorded origin, publication checks, and the history boundary.
+
+The newly authored project material is offered under [0BSD](LICENSE). Runtime and browser software retain their own licenses.
+
+## Optional fictional demo
+
+A new installation is empty. This explicit command inserts four labeled fictional projects. Use a separate test DATA_DIR instance; it does not execute real work.
 
 ```sh
-npm run test:local
-npm test
-npm run test:template
-npm run test:recovery
-npm run test:runtime
-npm run test:usage
-npm run build
-python3 scripts/check-docs.py
-python3 -m unittest discover -s tests -p 'test_desktop_start.py' -v
-python3 -m unittest discover -s tests -p 'test_package_local.py' -v
+node demo.mjs --confirm-demo
 ```
 
-Source integrity checks read `SOURCE_MANIFEST.json`. Refresh source hashes and package manifests after changing included source or documentation. The nested `.github/workflows/` files are retained upstream files; their location means they do not automatically run as this repository's GitHub Actions workflows. Upstream releases and historical platform checks do not establish new releases or platform certification for this project.
+Set `DOT_CONSOLE_URL=http://127.0.0.1:8796` for a separate demo instance on port 8796.
 
-## Provenance and license
+## Existing repository history
 
-This repository was migrated from the Dot Console `main` branch on Gitea, preserving its commit history. The application-source baseline for GitHub publication is `3e5da01`, including resource monitoring and the simplified console header. See [PROVENANCE.json](PROVENANCE.json).
-
-Dot Console is a modified version of [graydeon/dot-panel](https://github.com/graydeon/dot-panel). It retains upstream source, copyright notices, and **GNU AGPL version 3 only (`AGPL-3.0-only`)**. See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](dot-panel-main/THIRD_PARTY_NOTICES.md). The current combined application, including its modifications, remains under AGPL; dependencies retain their own licenses.
-
-A permissive license such as 0BSD cannot replace the license of inherited upstream code without appropriate authorization from the relevant copyright holders. Changing the repository's license file alone would not grant that authorization. See [upstream AGPL section 5](https://github.com/graydeon/dot-panel/blob/main/LICENSE) and the [GNU licensing FAQ](https://www.gnu.org/licenses/gpl-faq.en.html#Consider).
-
-This project is not officially affiliated with OpenAI, ChatGPT, or Cloudflare. Submit issues and suggestions through [GitHub Issues](https://github.com/AshWood97/Dot-Console/issues). See [SECURITY.md](dot-panel-main/SECURITY.md) for deployment identity and data-handling boundaries.
+The current source tree is the independent **0BSD** implementation imported from Gitea commit `91abfa8`. The GitHub repository is public. Earlier legacy commits remain in history under their original **AGPL-3.0-only** license; the current `LICENSE` applies to the independent implementation and does not relicense those earlier files. See [the repository-history boundary](PROVENANCE.md#repository-history-boundary).

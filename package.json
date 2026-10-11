@@ -1,0 +1,30 @@
+{
+  "name": "dot-console-independent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "0BSD",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "check": "node --check server.mjs && node --check cli.mjs"
+  },
+  "files": [
+    "server.mjs",
+    "cli.mjs",
+    "demo.mjs",
+    "lib/",
+    "public/",
+    "test/",
+    "README.md",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "PROVENANCE.md",
+    "LICENSE",
+    "TEST_REPORT.md",
+    "README.en.md"
+  ]
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#101211">
+  <meta name="description" content="项目、任务与真实系统资源的实时看板。">
+  <title>Dot Console · 项目看板</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#projects">跳到项目</a>
+  <div class="app-shell">
+    <header class="page-header">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">d</span><h1>Dot Console<span class="brand-divider">/</span><span class="brand-subtitle">项目看板</span></h1></div>
+      <div class="connection-cluster"><span id="connection" class="connection connecting" role="status"><span class="status-dot" aria-hidden="true"></span><span id="connection-text">连接中</span></span><span id="last-sync" class="muted">正在读取工作区</span></div>
+      <div class="header-actions"><button id="import-button" class="button secondary" type="button">导入</button><button id="export-button" class="button secondary" type="button">导出</button><button id="refresh-button" type="button" class="button secondary" aria-label="立即刷新">刷新</button></div>
+    </header>
+    <main>
+      <section class="resource-panel" aria-labelledby="resources-title">
+        <div class="resource-heading"><h2 id="resources-title">真实资源</h2><span id="resource-time" class="muted">等待测量</span></div>
+        <div class="resource-grid">
+          <article class="resource" aria-labelledby="cpu-label"><div class="resource-top"><h3 id="cpu-label">CPU</h3><span id="cpu-scope" class="scope">范围未知</span></div><div class="resource-value" id="cpu-value">等待测量</div><div class="meter" id="cpu-meter" role="meter" aria-label="CPU 使用率" aria-valuemin="0" aria-valuemax="100"><span id="cpu-bar"></span></div><p id="cpu-detail" class="resource-detail">等待测量</p></article>
+          <article class="resource" aria-labelledby="memory-label"><div class="resource-top"><h3 id="memory-label">内存</h3><span id="memory-scope" class="scope">范围未知</span></div><div class="resource-value" id="memory-value">等待测量</div><div class="meter" id="memory-meter" role="meter" aria-label="内存使用率" aria-valuemin="0" aria-valuemax="100"><span id="memory-bar"></span></div><p id="memory-detail" class="resource-detail">等待测量</p></article>
+          <article class="resource" aria-labelledby="disk-label"><div class="resource-top"><h3 id="disk-label">磁盘</h3><span id="disk-scope" class="scope">范围未知</span></div><div class="resource-value" id="disk-value">等待测量</div><div class="meter" id="disk-meter" role="meter" aria-label="磁盘使用率" aria-valuemin="0" aria-valuemax="100"><span id="disk-bar"></span></div><p id="disk-detail" class="resource-detail">等待测量</p></article>
+        </div>
+        <p id="resource-error" class="resource-error" hidden></p>
+      </section>
+      <section class="work-section" aria-labelledby="work-title">
+        <div class="section-heading"><div class="section-title"><h2 id="work-title">项目</h2><span id="project-total" class="count-label">...</span></div><p class="section-note">各分组内，最近启动的项目优先</p></div>
+        <div class="workspace-controls">
+          <div id="summary" class="summary-grid" aria-label="按项目状态筛选">
+            <button type="button" class="summary-card" data-filter="running" aria-pressed="false"><span class="status-dot running" aria-hidden="true"></span><span class="summary-label">运行中</span><span class="summary-number" id="count-running">...</span></button>
+            <button type="button" class="summary-card" data-filter="waiting" aria-pressed="false"><span class="status-dot waiting" aria-hidden="true"></span><span class="summary-label">等待中</span><span class="summary-number" id="count-waiting">...</span></button>
+            <button type="button" class="summary-card" data-filter="completed" aria-pressed="false"><span class="status-dot completed" aria-hidden="true"></span><span class="summary-label">已完成</span><span class="summary-number" id="count-completed">...</span></button>
+            <button type="button" class="summary-card" data-filter="failed" aria-pressed="false"><span class="status-dot failed" aria-hidden="true"></span><span class="summary-label">需处理</span><span class="summary-number" id="count-failed">...</span></button>
+          </div>
+          <div class="toolbar"><div class="search-wrap"><label for="search" class="sr-only">搜索项目和任务</label><input id="search" type="search" placeholder="搜索项目或任务" autocomplete="off" spellcheck="false"><kbd aria-hidden="true">/</kbd></div><label for="group-filter" class="sr-only">项目分组</label><select id="group-filter"><option value="">所有分组</option></select><button id="clear-filter" type="button" class="button quiet" hidden>清除筛选</button></div>
+        </div>
+        <div id="state-error" class="notice error-notice" role="alert" hidden><div><strong id="state-error-title">连接中断</strong><p id="state-error-text"></p></div><button id="retry-button" class="button secondary" type="button">立即重试</button></div>
+        <p id="filter-description" class="filter-description" aria-live="polite" hidden></p>
+        <div id="projects" tabindex="-1" aria-busy="true"><div id="loading-state" class="empty-state"><h3>正在读取项目</h3><p>正在获取最新状态。</p></div><div id="project-groups"></div><div id="empty-state" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true"></span><h3 id="empty-title">还没有项目</h3><p id="empty-copy">使用本地 API 或 CLI 报告项目后会显示在这里，也可导入快照。</p><button id="empty-import" type="button" class="button secondary">导入快照</button></div></div>
+      </section>
+    </main>
+    <footer><span>状态来自实际任务记录，刷新不会改变任务状态。</span><span>每 3 秒刷新 · 卡片内可滚动查看全部任务</span></footer>
+  </div>
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <dialog id="import-dialog" aria-labelledby="import-title" aria-describedby="import-description"><form method="dialog" class="dialog-content"><div class="dialog-eyebrow">导入快照</div><h2 id="import-title">确认合并这些项目？</h2><p id="import-description">已有项目会保留。如果导入内容的项目或任务标识与现有内容重复，整次导入将被拒绝。</p><div class="import-preview"><span id="import-filename"></span><span id="import-count" class="muted"></span></div><p class="dialog-note">请仅导入可信文件。服务器会验证整个快照后再合并。</p><p id="import-error" class="dialog-error" role="alert" hidden></p><div class="dialog-actions"><button id="cancel-import" class="button secondary" value="cancel" type="button">取消</button><button id="confirm-import" class="button primary" value="confirm" type="button">确认合并</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

@@ -1,3 +1,0 @@
-# For localhost fixture use only. Never copy these values into production variables.
-LOCAL_DEV_MODE=true
-LOCAL_DEV_USER=local-demo-user
