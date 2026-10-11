@@ -1,5 +1,5 @@
 {
-  "project": "Dot Console local review snapshot",
+  "project": "Dot Console source snapshot",
   "license": "AGPL-3.0-only",
   "source_only": true,
   "scope": "Current included source; no inherited test claims",
@@ -34,7 +34,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "ff408dbf53932e2773f548a0369a1a9e37143c99f6e06fe160d3b03d2153479c"
+      "sha256": "5cb981845c60bc10d2822f503c4f024cd45a5e342ed8eb3f127901c8326aae62"
     },
     {
       "path": "SECURITY.md",
@@ -358,7 +358,7 @@
     },
     {
       "path": "packaging/LOCAL-INSTALL.md",
-      "sha256": "9654d55c2018ce3bf85fab316e536caa1c4d7bade29ca46c8df756bbf382d1a4"
+      "sha256": "216312224ca5951faf9b5e9b8051b914fca5ecdfe0746b3307c72a2aa2c2b3d2"
     },
     {
       "path": "packaging/plugin.json",

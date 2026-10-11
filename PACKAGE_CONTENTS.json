@@ -2,12 +2,12 @@
   "files": [
     {
       "path": "INSTALL.md",
-      "sha256": "9654d55c2018ce3bf85fab316e536caa1c4d7bade29ca46c8df756bbf382d1a4",
+      "sha256": "216312224ca5951faf9b5e9b8051b914fca5ecdfe0746b3307c72a2aa2c2b3d2",
       "mode": "0644"
     },
     {
       "path": "PROVENANCE.json",
-      "sha256": "bbe25ecde6cd16d9c17ce59d6ff49784c92e2af3b41e1782e1468380e1516a5a",
+      "sha256": "10d1b568969110b834699f1f301235e6f13d16966fae79ac96a9185c9e63e43e",
       "mode": "0644"
     },
     {
@@ -47,7 +47,7 @@
     },
     {
       "path": "dot-panel-main/README.md",
-      "sha256": "ff408dbf53932e2773f548a0369a1a9e37143c99f6e06fe160d3b03d2153479c",
+      "sha256": "5cb981845c60bc10d2822f503c4f024cd45a5e342ed8eb3f127901c8326aae62",
       "mode": "0644"
     },
     {
@@ -57,7 +57,7 @@
     },
     {
       "path": "dot-panel-main/SOURCE_MANIFEST.json",
-      "sha256": "ee47085b6329d47f1aea5ebe6b1225088a52c621a4db6ae44932db443584ba27",
+      "sha256": "ba300756327ce0e1346ca0ac41ee42ec93e7032fe69ccb7e1545208fd1534550",
       "mode": "0644"
     },
     {
@@ -457,7 +457,7 @@
     },
     {
       "path": "dot-panel-main/packaging/LOCAL-INSTALL.md",
-      "sha256": "9654d55c2018ce3bf85fab316e536caa1c4d7bade29ca46c8df756bbf382d1a4",
+      "sha256": "216312224ca5951faf9b5e9b8051b914fca5ecdfe0746b3307c72a2aa2c2b3d2",
       "mode": "0644"
     },
     {
